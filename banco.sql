@@ -1,8 +1,9 @@
 CREATE DATABASE IF NOT EXISTS leitura;
 USE leitura;
 
--- 1. Tabela de Alunos
 CREATE TABLE IF NOT EXISTS alunos (
+=======
+CREATE TABLE alunos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     numero VARCHAR(20),
@@ -15,6 +16,8 @@ CREATE TABLE IF NOT EXISTS alunos (
 
 -- 2. Tabela de Bibliotecárias
 CREATE TABLE IF NOT EXISTS bibliotecaria (
+=======
+CREATE TABLE bibliotecaria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     numero VARCHAR(20),
@@ -25,6 +28,8 @@ CREATE TABLE IF NOT EXISTS bibliotecaria (
 
 -- 3. Tabela de Livros
 CREATE TABLE IF NOT EXISTS livros (
+=======
+CREATE TABLE livros (
     id INT AUTO_INCREMENT PRIMARY KEY,
     numero_livro VARCHAR(50),
     titulo VARCHAR(150) NOT NULL,
@@ -33,8 +38,8 @@ CREATE TABLE IF NOT EXISTS livros (
     categoria VARCHAR(50) DEFAULT 'geral'
 );
 
--- 4. Tabela de Resenhas
 CREATE TABLE IF NOT EXISTS resenhas (
+CREATE TABLE emprestimos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     livro VARCHAR(150) NOT NULL,
     nota INT NOT NULL,
@@ -114,3 +119,9 @@ INSERT INTO livros (numero_livro, titulo, autor, data_publicacao, categoria) VAL
 ('#6004', 'Planejamento Estratégico Empresarial', 'Philip Kotler', '2022-01-01', 'adm');
 
 
+<<<<<<< HEAD
+=======
+    FOREIGN KEY (livro_id) REFERENCES livros(id),
+    FOREIGN KEY (aluno_id) REFERENCES alunos(id)
+);
+>>>>>>> 3990c70d2ee72e855a1bb8fdb2f54f801cb264ab
