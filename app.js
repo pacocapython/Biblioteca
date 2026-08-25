@@ -269,7 +269,6 @@ function carregarCategorias() {
   `;
 }
 
-// ABRE MODAL NA MESMA TELA
 async function abrirModalCategoria(event, categoriaId) {
   if (event) {
     event.preventDefault();
