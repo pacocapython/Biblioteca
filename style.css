@@ -1,0 +1,361 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f4f6fb;
+  color: #1e293b;
+  font-size: 16px;
+}
+
+/* BANNER SUPERIOR AZUL */
+.main-header {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: white;
+}
+
+.brand h1 { font-size: 28px; font-weight: 700; }
+.brand span { font-size: 16px; opacity: 0.85; }
+
+/* ABAS QUADRADAS */
+.banner-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-link {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-link.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-status {
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-login {
+  background: #00c853;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.btn-login:hover {
+  background: #00e676;
+  transform: translateY(-1px);
+}
+
+.app-container {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.section-title {
+  color: #1e3c72;
+  font-size: 24px;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.hero-section {
+  background: white;
+  padding: 60px 40px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.hero-section h2 {
+  color: #1e3c72;
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.hero-section p {
+  color: #64748b;
+  font-size: 20px;
+  font-style: italic;
+}
+
+/* CARDS DE LIVROS COM IMAGENS */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.book-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #f1f5f9;
+}
+
+.book-tag {
+  align-self: flex-start;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.book-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.book-author {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.btn-reserve {
+  margin-top: auto;
+  background: #2a5298;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-reserve:hover {
+  background: #1e3c72;
+}
+
+/* FORMULÁRIOS E RESENHAS */
+.card-box {
+  background: white;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.custom-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.custom-input {
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+.textarea-input {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.custom-input:focus {
+  border-color: #2a5298;
+}
+
+.btn-submit {
+  background: #2a5298;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* CARTÕES DE RESENHAS */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-card {
+  border-left: 4px solid #2a5298;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.review-text {
+  color: #475569;
+  font-size: 15px;
+}
+
+/* MODAL DE LOGIN/CADASTRO */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal-box {
+  background: white;
+  padding: 36px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.modal-tab-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  font-size: 16px;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.modal-tab-btn.active {
+  color: #2a5298;
+  border-bottom-color: #2a5298;
+}
+
+.login-tip {
+  font-size: 13px;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.grid-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.categories-grid, .students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.cat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.alert-card {
+  padding: 18px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+.alert-card.warning { background: #fef3c7; color: #92400e; }
+.alert-card.danger { background: #fee2e2; color: #991b1b; }
+
+.hidden { display: none !important; }

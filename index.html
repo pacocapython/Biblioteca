@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca CEEP</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- BANNER AZUL SUPERIOR -->
+  <header class="main-header">
+    <div class="header-content">
+      
+      <div class="brand">
+        <h1>CEEP</h1>
+        <span>Biblioteca</span>
+      </div>
+
+      <!-- NAVEGAÇÃO DO ALUNO / VISITANTE -->
+      <nav id="nav-aluno" class="banner-nav">
+        <button class="nav-link active" onclick="mudarAbaAluno('inicio', this)">Início</button>
+        <button class="nav-link" onclick="mudarAbaAluno('destaques', this)">Livros & Destaques</button>
+        <button class="nav-link" onclick="mudarAbaAluno('categorias', this)">Categorias</button>
+        <button class="nav-link" onclick="mudarAbaAluno('resenhas', this)">Resenhas & Opiniões</button>
+        <button class="nav-link" onclick="mudarAbaAluno('pedir', this)">Sugerir Livro</button>
+      </nav>
+
+      <!-- NAVEGAÇÃO DA BIBLIOTECÁRIA -->
+      <nav id="nav-biblio" class="banner-nav hidden">
+        <button class="nav-link active" onclick="mudarAbaBiblio('expirando', this)">Avisos</button>
+        <button class="nav-link" onclick="mudarAbaBiblio('reservas', this)">Reservas</button>
+        <button class="nav-link" onclick="mudarAbaBiblio('sugestoes', this)">Sugestões</button>
+        <button class="nav-link" onclick="mudarAbaBiblio('acervo', this)">Cadastrar Acervo</button>
+        <button class="nav-link" onclick="mudarAbaBiblio('alunos', this)">Alunos</button>
+      </nav>
+
+      <!-- STATUS E AUTENTICAÇÃO -->
+      <div class="user-actions">
+        <span id="user-status" class="user-status">Visitante</span>
+        <button id="btn-auth" class="btn-login" onclick="abrirModal()">Entrar / Cadastrar</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="app-container">
+
+    <!-- ================= VISÃO ALUNO / PÚBLICO ================= -->
+    <section id="visao-aluno" class="view-section">
+      
+      <div id="aluno-inicio" class="subview">
+        <div class="hero-section">
+          <h2>Bem-vindo à Biblioteca CEEP</h2>
+          <p>"O conhecimento transforma caminhos. Explore nosso acervo e faça suas leituras."</p>
+        </div>
+      </div>
+
+      <!-- LIVROS COM SUPORTE A IMAGEM -->
+      <div id="aluno-destaques" class="subview hidden">
+        <h3 class="section-title">Livros Disponíveis no Acervo</h3>
+        <div id="grid-livros-aluno" class="books-grid"></div>
+      </div>
+
+      <!-- ABA DE CATEGORIAS -->
+      <div id="aluno-categorias" class="subview hidden">
+        <p style="margin-bottom: 8px; color: #64748b; font-weight: 600;">Geral</p>
+        <div class="categories-grid" style="margin-bottom: 24px;">
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'didaticos')">📚 Livros Didáticos</div>
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'geral')">📖 Livros no Geral</div>
+        </div>
+
+        <p style="margin-bottom: 8px; color: #64748b; font-weight: 600;">Por Cursos TÉCNICOS</p>
+        <div class="categories-grid">
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'agricultura')">🌱 Agricultura</div>
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'enfermagem')">🩺 Enfermagem</div>
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'ds')">💻 Desenvolvimento de Sistemas</div>
+          <div class="cat-card" onclick="abrirModalCategoria(event, 'adm')">💼 Administração</div>
+        </div>
+      </div>
+
+      <!-- ABA DE RESENHAS -->
+      <div id="aluno-resenhas" class="subview hidden">
+        <div class="grid-two-columns">
+          <div class="card-box">
+            <h3 class="section-title">Escrever uma Resenha</h3>
+            <form id="form-resenha" class="custom-form" onsubmit="cadastrarResenha(event)">
+              <input type="text" id="resenha-livro" placeholder="Nome do Livro" required class="custom-input">
+              <select id="resenha-nota" class="custom-input" required>
+                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                <option value="3">⭐⭐⭐ (3/5)</option>
+                <option value="2">⭐⭐ (2/5)</option>
+                <option value="1">⭐ (1/5)</option>
+              </select>
+              <textarea id="resenha-texto" placeholder="Sua opinião/resenha sobre a obra..." required class="custom-input textarea-input"></textarea>
+              <button type="submit" class="btn-submit">Publicar Resenha</button>
+            </form>
+          </div>
+
+          <div class="card-box">
+            <h3 class="section-title">Resenhas da Comunidade</h3>
+            <div id="lista-resenhas" class="reviews-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUGERIR LIVRO (VISÃO ALUNO) -->
+      <div id="aluno-pedir" class="subview hidden">
+        <div class="card-box">
+          <h3 class="section-title">Sugerir Aquisição de Livro</h3>
+          <form class="custom-form" onsubmit="sugerirLivro(event)">
+            <input type="text" id="sugestao-titulo" placeholder="Nome do Livro Desejado" required class="custom-input">
+            <input type="text" id="sugestao-autor" placeholder="Autor" class="custom-input">
+            <button type="submit" class="btn-submit">Enviar Sugestão</button>
+          </form>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= VISÃO BIBLIOTECÁRIA ================= -->
+    <section id="visao-bibliotecaria" class="view-section hidden">
+      
+      <div id="biblio-expirando" class="subview">
+        <h3 class="section-title">Avisos e Pendências de Empréstimos</h3>
+        <div class="alert-card warning">
+          ⚠️ <strong>Dom Casmurro</strong> - Aluno: Gabriel (Vence Hoje)
+        </div>
+        <div class="alert-card danger">
+          🚨 <strong>O Cortiço</strong> - Aluno: Lucas (Atrasado há 2 dias)
+        </div>
+      </div>
+
+      <div id="biblio-reservas" class="subview hidden">
+        <h3 class="section-title">Solicitações de Reservas</h3>
+        <div id="lista-reservas-biblio" class="card-box">
+          <p>Nenhuma reserva pendente no momento.</p>
+        </div>
+      </div>
+
+      <!-- SUGESTÕES DOS ALUNOS (VISÃO BIBLIOTECÁRIA) -->
+      <div id="biblio-sugestoes" class="subview hidden">
+        <h3 class="section-title">Sugestões de Livros Enviadas pelos Alunos</h3>
+        <div id="lista-sugestoes-biblio" class="card-box">
+          <p>Carregando sugestões...</p>
+        </div>
+      </div>
+
+      <!-- CADASTRO COM NÚMERO E IMAGEM -->
+      <div id="biblio-acervo" class="subview hidden">
+        <div class="grid-two-columns">
+          <div class="card-box">
+            <h3 class="section-title">Cadastrar Novo Livro</h3>
+            <form id="form-cadastrar-livro" class="custom-form" onsubmit="cadastrarLivro(event)">
+              <input type="text" id="biblio-numero" placeholder="Número / Tombo do Livro (Ex: #1042)" required class="custom-input">
+              <input type="text" id="biblio-titulo" placeholder="Título do Livro" required class="custom-input">
+              <input type="text" id="biblio-autor" placeholder="Autor" required class="custom-input">
+              <input type="number" id="biblio-ano" placeholder="Ano de Publicação" required class="custom-input">
+              <button type="submit" class="btn-submit">Salvar no Banco de Dados</button>
+            </form>
+          </div>
+
+          <div class="card-box">
+            <h3 class="section-title">Livros no Acervo</h3>
+            <div id="lista-acervo-biblio" class="books-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="biblio-alunos" class="subview hidden">
+        <h3 class="section-title">Alunos Cadastrados no Banco</h3>
+        <div id="lista-alunos-biblio" class="students-grid"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL DE LOGIN / CADASTRO -->
+  <div id="modal-login" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <button class="modal-close" onclick="fecharModal()">&times;</button>
+      
+      <div class="modal-tabs">
+        <button id="tab-modal-login" class="modal-tab-btn active" onclick="alternarAbaModal('login')">Login</button>
+        <button id="tab-modal-cadastro" class="modal-tab-btn" onclick="alternarAbaModal('cadastro')">Cadastro</button>
+      </div>
+
+      <form id="form-login" class="custom-form" onsubmit="efetuarLogin(event)">
+        <p class="login-tip">Dica: Use <strong>admin@ceep.com</strong> (senha: 123) para Bibliotecária.</p>
+        <input type="email" id="login-email" placeholder="Seu E-mail" required class="custom-input">
+        <input type="password" id="login-senha" placeholder="Sua Senha" required class="custom-input">
+        <button type="submit" class="btn-submit">Entrar</button>
+      </form>
+
+      <form id="form-cadastro" class="custom-form hidden" onsubmit="efetuarCadastro(event)">
+        <input type="text" id="cad-nome" placeholder="Nome Completo" required class="custom-input">
+        <input type="email" id="cad-email" placeholder="Seu E-mail" required class="custom-input">
+        <input type="password" id="cad-senha" placeholder="Crie uma Senha" required class="custom-input">
+        <button type="submit" class="btn-submit">Criar Conta no Banco</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ESTRUTURA DO MODAL DA CATEGORIA -->
+  <div id="modal-categoria-livros" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6); z-index: 999999; justify-content: center; align-items: center;">
+    <div style="background: #ffffff; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; position: relative;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 14px;">
+        <h3 id="titulo-modal-cat" style="margin: 0; color: #0f172a; font-size: 18px;">Categoria</h3>
+        <button onclick="fecharModalCategoria()" style="background: transparent; border: none; font-size: 22px; cursor: pointer; color: #64748b; font-weight: bold;">✕</button>
+      </div>
+
+      <!-- Onde aparecem os livros da categoria -->
+      <div id="conteudo-modal-cat"></div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
