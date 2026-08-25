@@ -1,0 +1,1 @@
+https://aczwmyilimgadjkytiap.supabase.co
