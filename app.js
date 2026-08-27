@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = ' https://biblioteca-api-iv4s.onrender.com';
 let usuarioAtual = null;
 
 // BANCO DE DADOS LOCAL (LOCALSTORAGE)
