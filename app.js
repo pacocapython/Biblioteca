@@ -366,8 +366,23 @@ async function reservarLivro(titulo) {
     abrirModal();
     return;
   }
-  const novaReserva = { aluno_nome: usuarioAtual.nome, livro_titulo: titulo };
+
+  // Calcula a data de hoje e adiciona 7 dias de prazo
+  const hoje = new Date();
+  const prazoDevolucao = new Date();
+  prazoDevolucao.setDate(hoje.getDate() + 7);
+
+  // Formata a data para o padrão brasileiro (DD/MM/AAAA)
+  const dataFormatada = prazoDevolucao.toLocaleDateString('pt-BR');
+
+  const novaReserva = { 
+    aluno_nome: usuarioAtual.nome, 
+    livro_titulo: titulo,
+    prazo: dataFormatada 
+  };
+  
   db.add('reservas', novaReserva);
+
   try {
     await fetch(`${API_URL}/reservas`, {
       method: 'POST',
@@ -375,7 +390,8 @@ async function reservarLivro(titulo) {
       body: JSON.stringify(novaReserva)
     });
   } catch (err) {}
-  alert(`Livro "${titulo}" reservado com sucesso!`);
+
+  alert(`Livro "${titulo}" reservado! Devolução até: ${dataFormatada}`);
   carregarReservas();
 }
 
@@ -393,9 +409,12 @@ async function carregarReservas() {
 
   if (reservas.length > 0) {
     container.innerHTML = reservas.map(r => `
-      <div class="cat-card">
+      <div class="cat-card" style="padding:12px; margin-bottom:10px; border:1px solid #cbd5e1; border-radius:8px; background:#fff;">
         <strong>Livro:</strong> ${r.livro_titulo || r.livro}<br>
-        <small><strong>Solicitante:</strong> ${r.aluno_nome || r.aluno}</small>
+        <small><strong>Solicitante:</strong> ${r.aluno_nome || r.aluno}</small><br>
+        <span style="color: #dc2626; font-weight: bold; font-size: 13px;">
+          📅 Devolver até: ${r.prazo || '7 dias após retirada'}
+        </span>
       </div>
     `).join('');
   } else {
